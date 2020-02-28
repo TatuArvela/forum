@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Logged out - {{ block.super }}
+{% endblock %}
+
+{% block notifications %}
+<p class="alert alert-primary my-4">Logged out.</p>
+{% endblock %}
+
+{% block breadcrumb-header %}{% endblock %}
+
+{% block content %}
+<div class="card bg-light my-4 col-sm-6 mx-auto">
+  <div class="card-body text-center">
+    <a href="{% url 'login'%}">Click here to login again</a>
+  </div>
+</div>
+{% endblock %}
