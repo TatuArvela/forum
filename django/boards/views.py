@@ -18,6 +18,7 @@ def boards(request):
         display_board = {}
         display_board["pk"] = board.pk
         display_board["name"] = board.name
+        display_board["description"] = board.description
         display_board["topic_count"] = board.topics.count
         display_board["post_count"] = board.topics.aggregate(Count("posts"))[
             "posts__count"
