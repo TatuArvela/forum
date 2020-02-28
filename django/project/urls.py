@@ -9,6 +9,10 @@ urlpatterns = [
     path("boards/<int:pk>/", views.board_topics, name="board_topics"),
     path("boards/<int:pk>/new/", views.new_topic, name="new_topic"),
     path("topics/<int:pk>/", views.topic_replies, name="topic_replies"),
+]
+
+# Add Django site admin urls
+urlpatterns += [
     path("admin/", admin.site.urls),
 ]
 
