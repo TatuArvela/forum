@@ -1,0 +1,55 @@
+{% extends 'base_table.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}
+{{ topic.subject }} - {{ topic.board.name }} - {{ block.super }}
+{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'boards' %}">Boards</a></li>
+<li class="breadcrumb-item"><a href="{% url 'board_topics' topic.board.id %}">{{ topic.board.name }}</a></li>
+<li class="breadcrumb-item active">{{ topic.subject }}</li>
+{% endblock %}
+
+{% block table-title--hide %}{% endblock %}
+
+{% block table-head %}
+<tr>
+  <th class="p-2 col-2">
+    Author
+  </th>
+  <th class="p-2 col-10">
+    Topic: {{ topic.subject }}
+  </th>
+</tr>
+{% endblock %}
+
+{% block table-body %}
+{% for reply in topic.posts.all %}
+<tr>
+  <td class="text-center">
+    <p class="font-weight-bold">{{ reply.created_by.username }}</p>
+  </td>
+  <td>
+    <p class="small">Posted: {{ reply.created_at }}</p>
+    <p class="white-space-pre">{{ reply.message }}</p>
+    <p class="small">
+      {% if reply.updated_by %}Updated by {{ reply.updated_by }} on
+      {{ reply.updated_at }}{% endif %}
+    </p>
+  </td>
+</tr>
+{% endfor %}
+{% endblock %}
+
+{% block table-after %}
+<div class="card bg-light my-4">
+  <div class="card-header bg-dark text-light font-weight-bold p-2">Reply to topic</div>
+  <form method="post" class="card-body" novalidate>
+    {% csrf_token %}
+    {% include 'includes/form.html' %}
+    <button type="submit" class="btn btn-primary pull-right">Post</button>
+  </form>
+</div>
+{% endblock %}
