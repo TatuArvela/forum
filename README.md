@@ -1,15 +1,27 @@
-# Boards
+# Forum
 
-Boards is a sample message board web application. This repository contains multiple implementations with identical features built with different frameworks. The UI is built with Bootstrap.
+Forum is a sample message board web application. This repository contains multiple implementations with identical features built with different frameworks. The UI is built with Bootstrap.
 
 ## Features
 
-* List of boards
-* List of topics in a board
-* List of replies in a topic
-* Adding topics
-* Adding replies
-* Login / Logout
+```
+├──⟨ᴜsᴇʀs⟩
+│   ├── create (admin)
+│   ├── log in
+│   └── log out
+└──⟨ʙᴏᴀʀᴅs⟩
+    ├── index
+    ├── create (admin)
+    ├── delete (admin)
+    └── show
+        └──⟨ᴛʜʀᴇᴀᴅs⟩
+            ├── create
+            ├── delete (admin)
+            └── show
+                └──⟨ᴘᴏsᴛs⟩
+                    ├── create
+                    └── delete (admin)
+```
 
 ## Versions
 
@@ -20,6 +32,10 @@ Reference implementation, which is based on the tutorial [A Complete Beginner's 
 ### Rails / Ruby
 
 Work in progress.
+
+### Node.js
+
+Planned.
 
 ### Laravel / PHP
 
