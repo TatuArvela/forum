@@ -1,35 +1,33 @@
 {% extends 'base_table.html' %}
 
 {% block title %}
-{{ board.name }} - {{ block.super }}
+{{ board.title }} - {{ block.super }}
 {% endblock %}
 
 {% block breadcrumb %}
 <li class="breadcrumb-item"><a href="{% url 'boards' %}">Boards</a></li>
-<li class="breadcrumb-item active">{{ board.name }}</li>
+<li class="breadcrumb-item active">{{ board.title }}</li>
 {% endblock %}
-
-{% block table-title--hide %}{% endblock %}
 
 {% block table-head %}
 <tr>
-  <th class="p-2 col-8 text-nowrap">Topic / Starter</th>
+  <th class="p-2 col-8 text-nowrap">Thread / Starter</th>
   <th class="p-2 col-2 text-nowrap">Replies</th>
   <th class="p-2 col-2 text-nowrap">Last Reply</th>
 </tr>
 {% endblock %}
 
 {% block table-body %}
-{% for topic in board.topics.all %}
+{% for thread in board.threads.all %}
 <tr>
   <td class="align-middle">
-    <a href="{% url 'topic_replies' topic.pk %}">{{ topic.subject }}</a>
-    <small class="muted d-block">{{ topic.created_by.username }}</small>
+    <a href="{% url 'thread_replies' thread.pk %}">{{ thread.title }}</a>
+    <small class="muted d-block">{{ thread.created_by.username }}</small>
   </td>
-  <td class="align-middle">{{ topic.posts.all|length }}</td>
+  <td class="align-middle">{{ thread.posts.all|length }}</td>
   <!-- <td>0</td> -->
   <td class="align-middle">
-    {% with last_post=topic.posts.all|dictsort:"updated_at"|last %}
+    {% with last_post=thread.posts.all|dictsort:"updated_at"|last %}
     {{ last_post.updated_at }}
     {% endwith %}
   </td>
@@ -39,6 +37,6 @@
 
 {% block table-after %}
 <div class="my-4 text-right">
-  <a href="{% url 'new_topic' board.pk %}" class="btn btn-primary">New topic</a>
+  <a href="{% url 'new_thread' board.pk %}" class="btn btn-primary">New thread</a>
 </div>
 {% endblock %}

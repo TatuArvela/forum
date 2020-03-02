@@ -1,8 +1,8 @@
 from django import forms
-from .models import Post, Topic
+from .models import Post, Thread
 
 
-class NewTopicForm(forms.ModelForm):
+class NewThreadForm(forms.ModelForm):
     message = forms.CharField(
         widget=forms.Textarea(
             attrs={"rows": 5, "placeholder": "What is on your mind?"}
@@ -12,8 +12,8 @@ class NewTopicForm(forms.ModelForm):
     )
 
     class Meta:
-        model = Topic
-        fields = ["subject", "message"]
+        model = Thread
+        fields = ["title", "message"]
 
 
 class NewPostForm(forms.ModelForm):

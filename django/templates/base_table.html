@@ -1,20 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% block table-before %}{% endblock %}
+
+{% block table-before %}
+{% endblock %}
+
 <div class="card overflow-hidden my-4">
   <div class="card-body p-0">
     <table class="table table-striped mb-0">
-      {% block table-head--hide %}
+
       <thead class="thead-dark">
-        {% block table-head %}{% endblock %}
+        {% block table-head %}
+        {% endblock %}
       </thead>
-      {% endblock %}
+
       <tbody>
-        {% block table-body %}{% endblock %}
+        {% block table-body %}
+        {% endblock %}
       </tbody>
+
     </table>
   </div>
 </div>
-{% block table-after %}{% endblock %}
+
+{% block table-after %}
+{% endblock %}
+
 {% endblock %}

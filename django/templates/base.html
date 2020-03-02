@@ -1,53 +1,29 @@
-{% load static %}
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="utf-8">
-  <title>{% block title %}Django Boards{% endblock %}</title>
-
-  <link rel="icon" type="image/png" sizes="16x16" href="{% static '/favicon.ico' %}">
-  <meta name="theme-color" content="#28a745">
-
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Maven+Pro&display=swap">
-  <link rel="stylesheet" lang="text/css"
-    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-  <link rel="stylesheet" lang="text/css"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="{% static 'css/app.css' %}">
-</head>
+{% include head.html %}
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-success text-light justify-content-between">
-    <a class="navbar-brand" href="{% url 'boards' %}">Django Boards</a>
-    <div class="navbar-nav ml-auto">
-      <form class="form-inline">
-        {% if user.username %}
-        <div class="label mr-3">{{ user.username }}</div>
-        <a class="btn btn-sm btn-outline-light"
-          href="{% url 'logout' %}?next={% url 'boards' %}?loggedOut=true">Logout</a>
-        {% else %}
-        <a class="btn btn-sm btn-outline-light" href="{% url 'login' %}">Login</a>
-        {% endif %}
-      </form>
-    </div>
-  </nav>
-
+  {% include nav.html %}
 
   <div class="container">
     {% block notifications %}
+    {% if logged_out %}
+    <p class="alert alert-primary my-4">Logged out.</p>
+    {% endif %}
     {% endblock %}
+
     {% block breadcrumb-header %}
     <ol class="breadcrumb bg-transparent p-2 my-4">
       {% block breadcrumb %}
       {% endblock %}
     </ol>
     {% endblock %}
+
     {% block content %}
     {% endblock %}
   </div>
-
 
 </body>
 

@@ -1,23 +1,22 @@
 {% extends 'base_card.html' %}
-
 {% load widget_tweaks %}
 
-{% block title %}Start a New Topic - {{ block.super }}{% endblock %}
+{% block title %}Start a New Thread - {{ block.super }}{% endblock %}
 
 {% block breadcrumb %}
 <li class="breadcrumb-item"><a href="{% url 'boards' %}">Boards</a></li>
-<li class="breadcrumb-item"><a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a></li>
-<li class="breadcrumb-item active">New topic</li>
+<li class="breadcrumb-item"><a href="{% url 'board_threads' board.pk %}">{{ board.title }}</a></li>
+<li class="breadcrumb-item active">New thread</li>
 {% endblock %}
 
-{% block card-title %}New topic{% endblock %}
+{% block card-title %}New thread{% endblock %}
 
 {% block card-body %}
 <form method="post" novalidate>
   {% csrf_token %}
   {% include 'includes/form.html' %}
   <div class="pull-right">
-    <a href="{% url 'board_topics' board.pk %}" class="btn btn-secondary">Cancel</a>
+    <a href="{% url 'board_threads' board.pk %}" class="btn btn-secondary">Cancel</a>
     <button type="submit" class="btn btn-success">Post</button>
   </div>
 </form>

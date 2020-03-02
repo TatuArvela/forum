@@ -1,0 +1,14 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-success text-light justify-content-between">
+  <a class="navbar-brand" href="{% url 'boards' %}">Django Forum</a>
+  <div class="navbar-nav ml-auto">
+    <form class="form-inline">
+      {% if user.username %}
+      <div class="label mr-3">{{ user.username }}</div>
+      <a class="btn btn-sm btn-outline-light"
+        href="{% url 'logout' %}?next={% url 'boards' %}?loggedOut=true">Logout</a>
+      {% else %}
+      <a class="btn btn-sm btn-outline-light" href="{% url 'login' %}">Login</a>
+      {% endif %}
+    </form>
+  </div>
+</nav>

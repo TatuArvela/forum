@@ -1,18 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% block card-before %}{% endblock %}
+
+{% block card-before %}
+{% endblock %}
+
 <div class="card overflow-hidden bg-light my-4">
-  {% block card-title--hide %}
+
   <div class="card-header bg-dark text-light font-weight-bold p-2">
-    {% block card-title %}{% endblock %}
+    {% block card-title %}
+    {% endblock %}
   </div>
-  {% endblock %}
-  {% block card-body--hide %}
+
   <div class="card-body">
-    {% block card-body %}{% endblock %}
+    {% block card-body %}
+    {% endblock %}
   </div>
-  {% endblock %}
+
 </div>
-{% block card-after %}{% endblock %}
+
+{% block card-after %}
+{% endblock %}
+
 {% endblock %}

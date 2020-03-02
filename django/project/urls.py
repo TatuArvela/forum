@@ -1,14 +1,16 @@
+from django.shortcuts import redirect
 from django.conf.urls import include
 from django.urls import path, re_path
 from django.contrib import admin
-from boards import views
+from forum.views import boards
 
 urlpatterns = [
-    path("", views.root, name="root"),
-    re_path(r"^boards/$", views.boards, name="boards"),
-    path("boards/<int:pk>/", views.board_topics, name="board_topics"),
-    path("boards/<int:pk>/new/", views.new_topic, name="new_topic"),
-    path("topics/<int:pk>/", views.topic_replies, name="topic_replies"),
+    path("", boards.index, name="root"),
+    # path("", redirect("views.boards"), name="root"),
+    # re_path(r"^boards/$", views.boards, name="boards"),
+    # path("boards/<int:pk>/", views.board_threads, name="board_threads"),
+    # path("boards/<int:pk>/new/", views.new_thread, name="new_thread"),
+    # path("threads/<int:pk>/", views.thread_replies, name="thread_replies"),
 ]
 
 # Add Django site admin urls

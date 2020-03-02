@@ -1,11 +1,5 @@
 {% extends 'base_table.html' %}
 
-{% block notifications %}
-{% if logged_out %}
-<p class="alert alert-primary my-4">Logged out.</p>
-{% endif %}
-{% endblock %}
-
 {% block breadcrumb %}
 <li class="breadcrumb-item active">Boards</li>
 {% endblock %}
@@ -22,11 +16,11 @@
 {% for board in boards %}
 <tr>
   <td class="col-6 align-middle">
-    <a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a>
+    <a href="{% url 'board_threads' board.pk %}">{{ board.title }}</a>
     <small class="text-muted d-block">{{ board.description }}</small>
   </td>
   <td class="col-3 align-middle">
-    <small class="d-block">{{ board.topic_count }} topic{{ board.topic_count|pluralize }}</small>
+    <small class="d-block">{{ board.thread_count }} thread{{ board.thread_count|pluralize }}</small>
     <small class="d-block">{{ board.post_count }} post{{ board.post_count|pluralize }}</small>
   </td>
   <td class="col-3 align-middle">Latest post: {{ board.last_update }}</td>

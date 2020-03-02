@@ -1,18 +1,15 @@
 {% extends 'base_table.html' %}
-
 {% load widget_tweaks %}
 
 {% block title %}
-{{ topic.subject }} - {{ topic.board.name }} - {{ block.super }}
+{{ thread.title }} - {{ thread.board.title }} - {{ block.super }}
 {% endblock %}
 
 {% block breadcrumb %}
 <li class="breadcrumb-item"><a href="{% url 'boards' %}">Boards</a></li>
-<li class="breadcrumb-item"><a href="{% url 'board_topics' topic.board.id %}">{{ topic.board.name }}</a></li>
-<li class="breadcrumb-item active">{{ topic.subject }}</li>
+<li class="breadcrumb-item"><a href="{% url 'board_threads' thread.board.id %}">{{ thread.board.title }}</a></li>
+<li class="breadcrumb-item active">{{ thread.title }}</li>
 {% endblock %}
-
-{% block table-title--hide %}{% endblock %}
 
 {% block table-head %}
 <tr>
@@ -20,13 +17,13 @@
     Author
   </th>
   <th class="p-2 col-10">
-    Topic: {{ topic.subject }}
+    Thread: {{ thread.title }}
   </th>
 </tr>
 {% endblock %}
 
 {% block table-body %}
-{% for reply in topic.posts.all %}
+{% for reply in thread.posts.all %}
 <tr>
   <td class="text-center">
     <p class="font-weight-bold">{{ reply.created_by.username }}</p>
@@ -45,7 +42,7 @@
 
 {% block table-after %}
 <div class="card bg-light my-4">
-  <div class="card-header bg-dark text-light font-weight-bold p-2">Reply to topic</div>
+  <div class="card-header bg-dark text-light font-weight-bold p-2">Reply to thread</div>
   <form method="post" class="card-body" novalidate>
     {% csrf_token %}
     {% include 'includes/form.html' %}
