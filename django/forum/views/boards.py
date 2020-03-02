@@ -1,14 +1,14 @@
 from django.http import HttpResponse
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.db.models import Count, Max
 from django.shortcuts import render, get_object_or_404, redirect
-from forum.forms import NewPostForm, NewThreadForm
 from forum.models import Board, Post, Thread
 
 
-def index(request):
-    logged_out = request.GET.get("loggedOut")
+def root_redirect(request):
+    return redirect("boards")
+
+
+def __get_boards():
     boards = []
     for board in Board.objects.all().prefetch_related("threads"):
         display_board = {}
@@ -23,14 +23,37 @@ def index(request):
             Max("posts__updated_at")
         )["posts__updated_at__max"]
         boards.append(display_board)
-    return render(request, "index.html", {"boards": boards, "logged_out": logged_out})
+    return boards
+
+
+def index(request):
+    if request.method == "GET":
+        logged_out = request.GET.get("loggedOut")
+        boards = __get_boards()
+        return render(
+            request, "boards/index.html", {"boards": boards, "logged_out": logged_out}
+        )
+
+    elif request.method == "POST":
+        return HttpResponse("Not implemented")
+
+    else:
+        return HttpResponse("Invalid method")
+
+
+def show(request, pk):
+    if request.method == "GET":
+        board = get_object_or_404(Board, pk=pk)
+        return render(request, "boards/show.html", {"board": board})
+
+    else:
+        return HttpResponse("Invalid method")
 
 
 def new(request):
-    return HttpResponse("Not implemented")
+    if request.method == "GET":
+        return HttpResponse("Not implemented")
 
-
-def view(request, pk):
-    board = get_object_or_404(Board, pk=pk)
-    return render(request, "view.html", {"board": board})
+    else:
+        return HttpResponse("Invalid method")
 

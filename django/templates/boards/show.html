@@ -21,11 +21,10 @@
 {% for thread in board.threads.all %}
 <tr>
   <td class="align-middle">
-    <a href="{% url 'thread_replies' thread.pk %}">{{ thread.title }}</a>
+    <a href="{% url 'threads_show' thread.pk %}">{{ thread.title }}</a>
     <small class="muted d-block">{{ thread.created_by.username }}</small>
   </td>
   <td class="align-middle">{{ thread.posts.all|length }}</td>
-  <!-- <td>0</td> -->
   <td class="align-middle">
     {% with last_post=thread.posts.all|dictsort:"updated_at"|last %}
     {{ last_post.updated_at }}
@@ -37,6 +36,6 @@
 
 {% block table-after %}
 <div class="my-4 text-right">
-  <a href="{% url 'new_thread' board.pk %}" class="btn btn-primary">New thread</a>
+  <a href="{% url 'threads_new' %}?board_id={{ board.pk }}" class="btn btn-primary">New thread</a>
 </div>
 {% endblock %}

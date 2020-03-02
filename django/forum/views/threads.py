@@ -1,46 +1,54 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.db.models import Count, Max
+from django.db import DatabaseError, transaction
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import NewPostForm, NewThreadForm
-from .models import Board, Post, Thread
+from forum.forms import NewPostForm, NewThreadForm
+from forum.models import Board, Post, Thread
 
 
-def view(request, pk):
+def index(request):
+    return HttpResponse("Not implemented")
+
+
+def show(request, pk):
     user = request.user
     thread = get_object_or_404(Thread, pk=pk)
-    if request.method == "POST":
-        if user.is_authenticated:
-            form = NewPostForm(request.POST)
-            if form.is_valid():
-                post = form.save(commit=False)
-                post.thread = thread
-                post.created_by = user
-                post.save()
-                return redirect("thread_replies", pk=thread.pk)
-        else:
-            return redirect("login")
-    else:
-        form = NewPostForm()
-    return render(request, "replies.html", {"thread": thread, "form": form})
+
+    form = NewPostForm()
+    return render(request, "threads/show.html", {"thread": thread, "form": form})
 
 
 @login_required
-def new(request, pk):
-    user = request.user
-    board = get_object_or_404(Board, pk=pk)
-    if user.is_authenticated and request.method == "POST":
+def new(request):
+    board_pk = request.GET["board_id"]
+    board = get_object_or_404(Board, pk=board_pk)
+
+    if request.method == "POST":
         form = NewThreadForm(request.POST)
         if form.is_valid():
+            user = request.user
             thread = form.save(commit=False)
             thread.board = board
             thread.created_by = user
-            thread.save()
-            post = Post.objects.create(
-                message=form.cleaned_data.get("message"), thread=thread, created_by=user
-            )
-            return redirect("thread_replies", pk=thread.pk)
-    else:
-        form = NewThreadForm()
-    return render(request, "new_thread.html", {"board": board, "form": form})
+            thread.updated_by = user
 
+            try:
+                with transaction.atomic():
+                    thread.save()
+                    post = Post.objects.create(
+                        message=form.cleaned_data.get("message"),
+                        created_by=user,
+                        updated_by=user,
+                        thread=thread,
+                    )
+            except DatabaseError:
+                messages.error(request, "Error")
+
+            return redirect("threads_show", pk=thread.pk)
+        else:
+            messages.error(request, "Error")
+
+    form = NewThreadForm(initial={"board": board.pk})
+    return render(request, "threads/new.html", {"board": board, "form": form})

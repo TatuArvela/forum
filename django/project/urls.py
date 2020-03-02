@@ -2,23 +2,21 @@ from django.shortcuts import redirect
 from django.conf.urls import include
 from django.urls import path, re_path
 from django.contrib import admin
-from forum.views import boards
+from forum.views import boards, threads, posts
 
 urlpatterns = [
-    path("", boards.index, name="root"),
-    # path("", redirect("views.boards"), name="root"),
-    # re_path(r"^boards/$", views.boards, name="boards"),
-    # path("boards/<int:pk>/", views.board_threads, name="board_threads"),
-    # path("boards/<int:pk>/new/", views.new_thread, name="new_thread"),
-    # path("threads/<int:pk>/", views.thread_replies, name="thread_replies"),
-]
-
-# Add Django site admin urls
-urlpatterns += [
+    path("", boards.root_redirect, name="root"),
+    re_path(r"^boards/$", boards.index, name="boards"),
+    path("boards/<int:pk>/", boards.show, name="boards_show"),
+    re_path(r"^boards/new$", boards.new, name="boards_new"),
+    re_path(r"^threads/$", threads.index, name="threads"),
+    path("threads/<int:pk>/", threads.show, name="threads_show"),
+    re_path(r"^threads/new$", threads.new, name="threads_new"),
+    re_path(r"^posts/$", posts.index, name="posts"),
+    path("posts/<int:pk>/", posts.show, name="posts_show"),
+    re_path(r"^posts/new$", posts.new, name="posts_new"),
+    # Add Django site admin urls
     path("admin/", admin.site.urls),
-]
-
-# Add Django site authentication urls (for login, logout, password management)
-urlpatterns += [
+    # Add Django site authentication urls (for login, logout, password management)
     path("accounts/", include("django.contrib.auth.urls")),
 ]

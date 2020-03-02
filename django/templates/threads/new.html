@@ -5,18 +5,18 @@
 
 {% block breadcrumb %}
 <li class="breadcrumb-item"><a href="{% url 'boards' %}">Boards</a></li>
-<li class="breadcrumb-item"><a href="{% url 'board_threads' board.pk %}">{{ board.title }}</a></li>
+<li class="breadcrumb-item"><a href="{% url 'boards_show' board.pk %}">{{ board.title }}</a></li>
 <li class="breadcrumb-item active">New thread</li>
 {% endblock %}
 
-{% block card-title %}New thread{% endblock %}
+{% block card-title %}New thread in {{ board.title }}{% endblock %}
 
 {% block card-body %}
 <form method="post" novalidate>
   {% csrf_token %}
   {% include 'includes/form.html' %}
   <div class="pull-right">
-    <a href="{% url 'board_threads' board.pk %}" class="btn btn-secondary">Cancel</a>
+    <a href="{% url 'boards_show' board.pk %}" class="btn btn-secondary">Cancel</a>
     <button type="submit" class="btn btn-success">Post</button>
   </div>
 </form>

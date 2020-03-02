@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Thread
+from .models import Board, Post, Thread
 
 
 class NewThreadForm(forms.ModelForm):
