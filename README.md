@@ -4,6 +4,8 @@ Forum is a sample message board web application. This repository contains multip
 
 ## Features
 
+### Graph
+
 ```
 ├──⟨ᴜsᴇʀs⟩
 │   ├── create (admin)
@@ -23,11 +25,41 @@ Forum is a sample message board web application. This repository contains multip
                     └── delete (admin)
 ```
 
+### List
+
+- [ ] Create user (admin)
+- [ ] Log in
+- [ ] Log out
+- [ ] List boards
+- [ ] Create board (admin)
+- [ ] Delete board (admin)
+- [ ] List threads in board
+- [ ] Create thread
+- [ ] Delete thread (admin)
+- [ ] List posts in thread
+- [ ] Create post
+- [ ] Delete post (admin)
+
 ## Versions
 
 ### Django / Python
 
 Reference implementation, which is based on the tutorial [A Complete Beginner's Guide to Django](https://simpleisbetterthancomplex.com/series/beginners-guide/1.11/).
+
+### Feature List
+
+- [X] Create user (admin)
+- [X] Log in
+- [X] Log out
+- [X] List boards
+- [ ] Create board (admin)
+- [ ] Delete board (admin)
+- [X] List threads in board
+- [X] Create thread (authenticated)
+- [ ] Delete thread (admin)
+- [X] List posts in thread
+- [X] Create post (authenticated)
+- [ ] Delete post (admin)
 
 ### Rails / Ruby
 
