@@ -1,5 +1,6 @@
-from django.http import HttpResponse
+from django.contrib.auth.decorators import permission_required
 from django.db.models import Count, Max
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from forum.models import Board, Post, Thread
 
@@ -50,6 +51,7 @@ def show(request, pk):
         return HttpResponse("Invalid method")
 
 
+@permission_required('forum.add_board')
 def new(request):
     if request.method == "GET":
         return HttpResponse("Not implemented")

@@ -11,9 +11,9 @@
 
 {% block table-head %}
 <tr>
-  <th class="p-2 col-8 text-nowrap">Thread / Starter</th>
+  <th class="p-2 col-6 text-nowrap">Thread / Starter</th>
   <th class="p-2 col-2 text-nowrap">Replies</th>
-  <th class="p-2 col-2 text-nowrap">Last Reply</th>
+  <th class="p-2 col text-nowrap" colspan=2>Last Reply</th>
 </tr>
 {% endblock %}
 
@@ -30,12 +30,15 @@
     {{ last_post.updated_at }}
     {% endwith %}
   </td>
+  {% if perms.forum.delete_thread %}<td class="align-middle"><button class="btn btn-danger btn-sm">Delete</button></td>{% endif %}
 </tr>
 {% endfor %}
 {% endblock %}
 
 {% block table-after %}
+{% if perms.forum.add_thread %}
 <div class="my-4 text-right">
   <a href="{% url 'threads_new' %}?board_id={{ board.pk }}" class="btn btn-primary">New thread</a>
 </div>
+{% endif %}
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.models import User
 from django.db import DatabaseError, transaction
 from django.http import HttpResponse
@@ -20,7 +20,7 @@ def show(request, pk):
     return render(request, "threads/show.html", {"thread": thread, "form": form})
 
 
-@login_required
+@permission_required('forum.add_thread')
 def new(request):
     board_pk = request.GET["board_id"]
     board = get_object_or_404(Board, pk=board_pk)

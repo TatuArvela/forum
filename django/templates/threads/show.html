@@ -13,10 +13,10 @@
 
 {% block table-head %}
 <tr>
-  <th class="p-2 col-2">
+  <th class="p-2 col-3">
     Author
   </th>
-  <th class="p-2 col-10">
+  <th class="p-2 col" colspan=2>
     Thread: {{ thread.title }}
   </th>
 </tr>
@@ -36,11 +36,13 @@
       {{ reply.updated_at }}{% endif %}
     </p>
   </td>
+  {% if perms.forum.delete_post %}<td><button class="btn btn-danger btn-sm">Delete</button></td>{% endif %}
 </tr>
 {% endfor %}
 {% endblock %}
 
 {% block table-after %}
+{% if perms.forum.add_post %}
 <div class="card bg-light my-4">
   <div class="card-header bg-dark text-light font-weight-bold p-2">Reply to thread</div>
   <form action="{% url 'posts_new' %}?thread_id={{ thread.pk }}" method="post" class="card-body" novalidate>
@@ -49,4 +51,5 @@
     <button type="submit" class="btn btn-primary pull-right">Post</button>
   </form>
 </div>
+{% endif %}
 {% endblock %}

@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from forum.forms import NewPostForm
@@ -13,7 +13,7 @@ def show(request):
     return HttpResponse("Not implemented")
 
 
-@login_required
+@permission_required('forum.add_post')
 def new(request):
     thread_pk = request.GET["thread_id"]
     thread = get_object_or_404(Thread, pk=thread_pk)
