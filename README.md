@@ -70,24 +70,32 @@ Create a new group called Users, and give it the following permissions:
 
 Create a new user, and give it the new group Users
 
-#### Features
+#### Tests
 
-- [X] Create user (admin)
-- [X] Log in
-- [X] Log out
-- [X] List boards
-- [ ] Create board (admin)
-- [ ] Delete board (admin)
-- [X] List threads in board
-- [X] Create thread (authenticated)
-- [ ] Delete thread (admin)
-- [X] List posts in thread
-- [X] Create post (authenticated)
-- [ ] Delete post (admin)
+Run the following command:
+
+```bash
+python manage.py test
+```
 
 ### Rails / Ruby
 
 Work in progress.
+
+#### Features
+
+- [ ] Create user (admin)
+- [ ] Log in
+- [ ] Log out
+- [ ] List boards
+- [ ] Create board (admin)
+- [ ] Delete board (admin)
+- [ ] List threads in board
+- [ ] Create thread (authenticated)
+- [ ] Delete thread (admin)
+- [ ] List posts in thread
+- [ ] Create post (authenticated)
+- [ ] Delete post (admin)
 
 ### Node.js
 
