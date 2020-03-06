@@ -24,7 +24,12 @@
     <small class="d-block">{{ board.post_count }} post{{ board.post_count|pluralize }}</small>
   </td>
   <td class="col align-middle">Latest post: {{ board.last_update }}</td>
-  {% if perms.forum.delete_board %}<td class="col-1 align-middle"><button class="btn btn-danger btn-sm">Delete</button></td>{% endif %}
+  {% if perms.forum.delete_board %}<td class="col-1 align-middle">
+    <form action="{% url 'boards_delete' board.pk %}" method="post">
+      {% csrf_token %}
+      <input class="btn btn-danger btn-sm" value="Delete" type="submit">
+    </form>
+  </td>{% endif %}
 </tr>
 {% endfor %}
 {% endblock %}
@@ -32,7 +37,7 @@
 {% block table-after %}
 {% if perms.forum.add_board %}
 <div class="my-4 text-right">
-  <a href="{% url 'threads_new' %}?board_id={{ board.pk }}" class="btn btn-primary">New board</a>
+  <a href="{% url 'boards_new' %}" class="btn btn-primary">New board</a>
 </div>
 {% endif %}
 {% endblock %}

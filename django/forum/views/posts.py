@@ -1,19 +1,23 @@
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.decorators.http import require_http_methods
 from forum.forms import NewPostForm
-from forum.models import Thread
+from forum.models import Post, Thread
 
 
+@require_http_methods(["GET"])
 def index(request):
     return HttpResponse("Not implemented")
 
 
+@require_http_methods(["GET"])
 def show(request):
     return HttpResponse("Not implemented")
 
 
-@permission_required('forum.add_post')
+@require_http_methods(["GET", "POST"])
+@permission_required("forum.add_post")
 def new(request):
     thread_pk = request.GET["thread_id"]
     thread = get_object_or_404(Thread, pk=thread_pk)
@@ -28,3 +32,12 @@ def new(request):
             post.updated_by = user
             post.save()
             return redirect("threads_show", pk=thread.pk)
+
+
+@require_http_methods(["POST"])
+@permission_required("forum.delete_post")
+def delete(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    thread = get_object_or_404(Thread, pk=post.thread.pk)
+    post.delete()
+    return redirect("threads_show", pk=thread.pk)
