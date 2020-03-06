@@ -6,7 +6,7 @@ Forum is a sample message board web application. This repository contains multip
 
 ### Graph
 
-```
+```text
 ├──⟨ᴜsᴇʀs⟩
 │   ├── create (admin)
 │   ├── log in
@@ -82,7 +82,7 @@ python manage.py test
 
 Work in progress.
 
-#### Features
+#### Features in progress
 
 - [ ] Create user (admin)
 - [ ] Log in
