@@ -46,7 +46,31 @@ Forum is a sample message board web application. This repository contains multip
 
 Reference implementation, which is based on the tutorial [A Complete Beginner's Guide to Django](https://simpleisbetterthancomplex.com/series/beginners-guide/1.11/).
 
-### Feature List
+#### Installation and configuration
+
+Run the commands below and follow their instructions:
+
+```bash
+pipenv install
+pipenv shell
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
+
+Open [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin) and log in with the the superuser account.
+
+Create a new group called Users, and give it the following permissions:
+
+- forum | board | Can view board
+- forum | post | Can add post
+- forum | post | Can view post
+- forum | thread | Can add thread
+- forum | thread | Can view thread
+
+Create a new user, and give it the new group Users
+
+#### Features
 
 - [X] Create user (admin)
 - [X] Log in
