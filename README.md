@@ -70,17 +70,29 @@ Create a new group called Users, and give it the following permissions:
 
 Create a new user, and give it the new group Users
 
+Finally, open [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
 #### Tests
 
 Run the following command:
 
 ```bash
+pipenv shell
 python manage.py test
 ```
 
 ### Rails / Ruby
 
-Work in progress.
+#### Installation and configuration
+
+Run the commands below and follow their instructions:
+
+```bash
+gem install
+rails server
+```
+
+Open [http://127.0.0.1:3000](http://127.0.0.1:3000)
 
 #### Features in progress
 
