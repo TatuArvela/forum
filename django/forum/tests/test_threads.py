@@ -1,17 +1,50 @@
+from django.contrib.auth.models import User
+from django.urls import reverse, resolve
 from django.test import TestCase
+from ..views.threads import (
+    index as index_view,
+    show as show_view,
+    new as new_view,
+    delete as delete_view,
+)
+from ..models import Board, Thread
 
 
 class ThreadsIndexTests(TestCase):
     def setUp(self):
-        test = 1
+        url = reverse("threads")
+        self.response = self.client.get(url)
 
-    def test_todo(self):
-        self.assertEquals(1, 1)
+    def test_index_view_status_code(self):
+        self.assertEquals(self.response.status_code, 200)
+
+    def test_index_view_response(self):
+        self.assertEquals(self.response.content, b"Not implemented")
+
+    def test_index_url_resolves_index_view(self):
+        view = resolve("/threads/")
+        self.assertEquals(view.func, index_view)
 
 
 class ThreadsShowTests(TestCase):
     def setUp(self):
-        test = 1
+        self.user = User.objects.create_user(
+            username="john", email="john@doe.com", password="123"
+        )
+        self.board = Board.objects.create(
+            title="Django",
+            description="Django board.",
+            created_by=self.user,
+            updated_by=self.user,
+        )
+        self.thread = Thread.objects.create(
+            title="How to test Django apps?",
+            board=self.board,
+            created_by=self.user,
+            updated_by=self.user,
+        )
+        url = reverse("boards_show", kwargs={"pk": self.board.pk})
+        self.response = self.client.get(url)
 
     def test_todo(self):
         self.assertEquals(1, 1)
