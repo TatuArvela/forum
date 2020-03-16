@@ -85,6 +85,34 @@ class BoardsShowTests(TestCase):
         show_thread_url = reverse("threads_show", kwargs={"pk": self.thread.pk})
         self.assertContains(self.response, 'href="{0}"'.format(show_thread_url))
 
+    def test_show_board_view_contains_link_back_to_boards(self):
+        show_thread_url = reverse("threads_show", kwargs={"pk": 1})
+        response = self.client.get(show_thread_url)
+        boards_url = reverse("boards")
+        self.assertContains(response, 'href="{0}"'.format(boards_url))
+
+    def test_show_board_view_contains_navigation_links_logged_out(self):
+        show_thread_url = reverse("threads_show", kwargs={"pk": 1})
+        homepage_url = reverse("boards")
+        threads_new_url = reverse("threads_new")
+        threads_query_string = "?board_id={0}".format(self.board.pk)
+
+        response = self.client.get(show_thread_url)
+
+        self.assertContains(response, 'href="{0}"'.format(homepage_url))
+        self.assertNotContains(response, 'href="{0}"'.format(threads_new_url + threads_query_string))
+
+    # def test_show_board_view_contains_navigation_links_logged_in(self):
+    #     show_thread_url = reverse("threads_show", kwargs={"pk": 1})
+    #     homepage_url = reverse("boards")
+    #     threads_new_url = reverse("threads_new")
+    #     threads_query_string = "?board_id={0}".format(self.board.pk)
+
+    #     response = self.client.get(show_thread_url)
+
+    #     self.assertContains(response, 'href="{0}"'.format(homepage_url))
+    #     self.assertContains(response, 'href="{0}"'.format(threads_new_url + threads_query_string))
+
 
 class BoardsNewTests(TestCase):
     def setUp(self):
