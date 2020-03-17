@@ -43,7 +43,7 @@
 {% block table-after %}
 {% if perms.forum.add_thread %}
 <div class="my-4 text-right">
-  <a href="{% url 'threads_new' %}?board_id={{ board.pk }}" class="btn btn-primary">New thread</a>
+  <a href="{% url 'threads_new' board_pk=board.pk %}" class="btn btn-primary">New thread</a>
 </div>
 {% endif %}
 {% endblock %}

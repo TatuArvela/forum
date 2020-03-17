@@ -50,7 +50,7 @@
 {% if perms.forum.add_post %}
 <div class="card bg-light my-4">
   <div class="card-header bg-dark text-light font-weight-bold p-2">Reply to thread</div>
-  <form action="{% url 'posts_new' %}?thread_id={{ thread.pk }}" method="post" class="card-body" novalidate>
+  <form action="{% url 'posts_new' thread_pk=thread.pk %}" method="post" class="card-body" novalidate>
     {% csrf_token %}
     {% include 'includes/form.html' %}
     <button type="submit" class="btn btn-primary pull-right">Post</button>

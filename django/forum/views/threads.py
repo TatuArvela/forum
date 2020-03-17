@@ -25,8 +25,7 @@ def show(request, pk):
 
 @require_http_methods(["GET", "POST"])
 @permission_required('forum.add_thread')
-def new(request):
-    board_pk = request.GET["board_id"]
+def new(request, board_pk):
     board = get_object_or_404(Board, pk=board_pk)
 
     if request.method == "POST":
@@ -51,10 +50,9 @@ def new(request):
                 messages.error(request, "Error")
 
             return redirect("threads_show", pk=thread.pk)
-        else:
-            messages.error(request, "Error")
+    else:
+        form = NewThreadForm(initial={"board": board.pk})
 
-    form = NewThreadForm(initial={"board": board.pk})
     return render(request, "threads/new.html", {"board": board, "form": form})
 
 
