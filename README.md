@@ -42,7 +42,7 @@ Forum is a sample message board web application. This repository contains multip
 
 ## Versions
 
-### Django / Python
+### Django (Python)
 
 Reference implementation, which is based on the tutorial [A Complete Beginner's Guide to Django](https://simpleisbetterthancomplex.com/series/beginners-guide/1.11/).
 
@@ -74,6 +74,8 @@ Finally, open [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
 #### Tests
 
+> _TODO: Better test coverage_
+
 Run the following command:
 
 ```bash
@@ -81,7 +83,7 @@ pipenv shell
 python manage.py test
 ```
 
-### Rails / Ruby
+### Rails (Ruby)
 
 #### Installation and configuration
 
