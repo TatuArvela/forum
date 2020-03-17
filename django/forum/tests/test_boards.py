@@ -8,11 +8,33 @@ from ..views.boards import (
     new as new_view,
     delete as delete_view,
 )
-from ..models import Board, Thread
+from ..models import Board, Thread, Post
+
+
+def setUpSharedUsers(self):
+    self.basic_user = User.objects.create_user(
+        username="john", email="john@doe.com", password="123"
+    )
+    self.admin_user = User.objects.create_user(
+        username="admin", email="admin@admin.com", password="admin"
+    )
+
+    board_content_type = ContentType.objects.get_for_model(Board)
+    add_board_permission = Permission.objects.get(
+        content_type=board_content_type, codename="add_board"
+    )
+    delete_board_permission = Permission.objects.get(
+        content_type=board_content_type, codename="delete_board"
+    )
+    self.admin_user.user_permissions.add(add_board_permission)
+    self.admin_user.user_permissions.add(delete_board_permission)
+
+
 
 
 class RootRedirectTests(TestCase):
     def setUp(self):
+        setUpSharedUsers(self)
         url = reverse("root")
         self.response = self.client.get(url)
 
@@ -25,15 +47,21 @@ class RootRedirectTests(TestCase):
 
 class BoardsIndexTests(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(
-            username="john", email="john@doe.com", password="123"
-        )
-        self.board = Board.objects.create(
+        setUpSharedUsers(self)
+
+        self.board1 = Board.objects.create(
             title="Django",
-            description="Django board.",
-            created_by=self.user,
-            updated_by=self.user,
+            description="Discussion regarding development of web apps with Django",
+            created_by=self.admin_user,
+            updated_by=self.admin_user,
         )
+        self.board2 = Board.objects.create(
+            title="Python",
+            description="General discussion regarding the Python programming language",
+            created_by=self.admin_user,
+            updated_by=self.admin_user,
+        )
+
         url = reverse("boards")
         self.response = self.client.get(url)
 
@@ -44,28 +72,38 @@ class BoardsIndexTests(TestCase):
         view = resolve("/boards/")
         self.assertEquals(view.func, index_view)
 
-    def test_index_view_contains_link_to_show_page(self):
-        show_url = reverse("boards_show", kwargs={"pk": self.board.pk})
-        self.assertContains(self.response, 'href="{0}"'.format(show_url))
+    def test_index_view_contains_links_to_show_view(self):
+        board1_show_url = reverse("boards_show", kwargs={"pk": self.board1.pk})
+        board2_show_url = reverse("boards_show", kwargs={"pk": self.board2.pk})
+        self.assertContains(self.response, 'href="{0}"'.format(board1_show_url))
+        self.assertContains(self.response, 'href="{0}"'.format(board2_show_url))
+
+    def test_index_view_contains_board_titles_and_descriptions(self):
+        self.assertContains(self.response, self.board1.title)
+        self.assertContains(self.response, self.board1.description)
+        self.assertContains(self.response, self.board2.title)
+        self.assertContains(self.response, self.board2.description)
+
+    # Test length of board table
 
 
 class BoardsShowTests(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(
-            username="john", email="john@doe.com", password="123"
-        )
+        setUpSharedUsers(self)
+
         self.board = Board.objects.create(
-            title="Django",
-            description="Django board.",
-            created_by=self.user,
-            updated_by=self.user,
+            title="Django Board",
+            description="Test description",
+            created_by=self.basic_user,
+            updated_by=self.basic_user,
         )
         self.thread = Thread.objects.create(
             title="How to test Django apps?",
             board=self.board,
-            created_by=self.user,
-            updated_by=self.user,
+            created_by=self.basic_user,
+            updated_by=self.basic_user,
         )
+
         url = reverse("boards_show", kwargs={"pk": self.board.pk})
         self.response = self.client.get(url)
 
@@ -116,26 +154,7 @@ class BoardsShowTests(TestCase):
 
 class BoardsNewTests(TestCase):
     def setUp(self):
-        self.basic_user = User.objects.create_user(
-            username="john", email="john@doe.com", password="123"
-        )
-        self.admin_user = User.objects.create_user(
-            username="admin", email="admin@admin.com", password="admin"
-        )
-
-        content_type = ContentType.objects.get_for_model(Board)
-        permission = Permission.objects.get(
-            content_type=content_type, codename="add_board"
-        )
-
-        self.admin_user.user_permissions.add(permission)
-
-        self.board = Board.objects.create(
-            title="Django",
-            description="Django board.",
-            created_by=self.basic_user,
-            updated_by=self.basic_user,
-        )
+        setUpSharedUsers(self)
 
     def test_new_view_status_code_as_not_permitted_user(self):
         self.client.force_login(self.basic_user)
@@ -156,23 +175,23 @@ class BoardsNewTests(TestCase):
 
 class BoardsDeleteTests(TestCase):
     def setUp(self):
-        self.basic_user = User.objects.create_user(
-            username="john", email="john@doe.com", password="123"
-        )
-        self.admin_user = User.objects.create_user(
-            username="admin", email="admin@admin.com", password="admin"
-        )
-
-        content_type = ContentType.objects.get_for_model(Board)
-        permission = Permission.objects.get(
-            content_type=content_type, codename="delete_board"
-        )
-
-        self.admin_user.user_permissions.add(permission)
+        setUpSharedUsers(self)
 
         self.board = Board.objects.create(
-            title="Django",
-            description="Django board.",
+            title="Django Board",
+            description="Test description",
+            created_by=self.basic_user,
+            updated_by=self.basic_user,
+        )
+        self.thread = Thread.objects.create(
+            title="How to test Django apps?",
+            board=self.board,
+            created_by=self.basic_user,
+            updated_by=self.basic_user,
+        )
+        self.post = Post.objects.create(
+            message="Please delete this post",
+            thread=self.thread,
             created_by=self.basic_user,
             updated_by=self.basic_user,
         )
