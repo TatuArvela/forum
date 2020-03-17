@@ -44,7 +44,14 @@ The UI is built with Bootstrap.
 
 ## Versions
 
-### Django (Python)
+- [Django / Python](###Django-/-Python)
+- [Rails / Ruby](###Rails-/-Ruby)
+- [Meteor / TypeScript / Node.js](###Meteor-/-TypeScript-/-Node.js)
+- [Laravel / PHP](###Laravel-/-PHP)
+- [Spring / Kotlin / JVM](###Spring-/-Kotlin-/-JVM)
+- [ASP.NET Core](###ASP.NET-Core)
+
+### Django / Python
 
 Reference implementation, which is based on the tutorial
 [A Complete Beginner's Guide to Django](https://simpleisbetterthancomplex.com/series/beginners-guide/1.11/).
@@ -87,7 +94,7 @@ pipenv shell
 python manage.py test
 ```
 
-### Rails (Ruby)
+### Rails / Ruby
 
 #### Installation and configuration
 
@@ -115,7 +122,7 @@ Open [http://127.0.0.1:3000](http://127.0.0.1:3000)
 - [ ] Create post (authenticated)
 - [ ] Delete post (admin)
 
-### Node.js
+### Meteor / TypeScript / Node.js
 
 Planned.
 
@@ -123,7 +130,7 @@ Planned.
 
 Planned.
 
-### Spring / Kotlin
+### Spring / Kotlin / JVM
 
 Planned.
 
