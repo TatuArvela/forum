@@ -1,6 +1,8 @@
 # Forum
 
-Forum is a sample message board web application. This repository contains multiple implementations with identical features built with different frameworks. The UI is built with Bootstrap.
+Forum is a sample message board web application. This repository contains
+multiple implementations with identical features built with different frameworks.
+The UI is built with Bootstrap.
 
 ## Features
 
@@ -44,7 +46,8 @@ Forum is a sample message board web application. This repository contains multip
 
 ### Django (Python)
 
-Reference implementation, which is based on the tutorial [A Complete Beginner's Guide to Django](https://simpleisbetterthancomplex.com/series/beginners-guide/1.11/).
+Reference implementation, which is based on the tutorial
+[A Complete Beginner's Guide to Django](https://simpleisbetterthancomplex.com/series/beginners-guide/1.11/).
 
 #### Installation and configuration
 
@@ -58,7 +61,8 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-Open [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin) and log in with the the superuser account.
+Open [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin) and
+log in with the superuser account.
 
 Create a new group called Users, and give it the following permissions:
 
