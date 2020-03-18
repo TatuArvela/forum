@@ -1,17 +1,8 @@
 class BoardsController < ApplicationController
-  def boards
-    render "boards/index", layout: "boards"
+  def new
   end
 
-  def board_topics
-    render plain: 'topics'
-  end
-
-  def new_topic
-    render plain: 'new_topic'
-  end
-
-  def topic_replies
-    render plain: 'topic_replies'
+  def create
+    render plain: params[:article].inspect
   end
 end
