@@ -64,22 +64,14 @@ Run the commands below and follow their instructions:
 pipenv install
 pipenv shell
 python manage.py migrate
-python manage.py createsuperuser
+python manage.py loaddata initial_data.json
 python manage.py runserver
 ```
 
-Open [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin) and
-log in with the superuser account.
+The following users are added automatically:
 
-Create a new group called Users, and give it the following permissions:
-
-- forum | board | Can view board
-- forum | post | Can add post
-- forum | post | Can view post
-- forum | thread | Can add thread
-- forum | thread | Can view thread
-
-Create a new user, and give it the new group Users
+* admin (password `admin`)
+* user (password `user`)
 
 Finally, open [http://127.0.0.1:8000](http://127.0.0.1:8000)
 

@@ -1,0 +1,90 @@
+[
+    {
+        "model": "auth.group",
+        "pk": 1,
+        "fields": {
+            "name": "Users",
+            "permissions": [
+                28,
+                33,
+                36,
+                29,
+                32
+            ]
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$180000$J5WNrlbaF6Si$g1H7GaV/GYYIMo5tO86xrA/Oqy6RZfw/2MGpxzApUjA=",
+            "last_login": null,
+            "is_superuser": true,
+            "username": "admin",
+            "first_name": "",
+            "last_name": "",
+            "email": "",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2020-03-28T20:35:11.364Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$180000$OmRQXi5mHK8w$MAx104bYA66mc9k0AN9bC7LbGNcO3qshCy7G2a6AixU=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "user",
+            "first_name": "",
+            "last_name": "",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2020-03-28T20:39:17.904Z",
+            "groups": [
+                1
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "forum.board",
+        "pk": 1,
+        "fields": {
+            "created_at": "2020-03-28T20:54:56.161Z",
+            "updated_at": "2020-03-28T20:54:56.161Z",
+            "created_by": 1,
+            "updated_by": 1,
+            "title": "Django",
+            "description": "Sample board"
+        }
+    },
+    {
+        "model": "forum.thread",
+        "pk": 1,
+        "fields": {
+            "created_at": "2020-03-28T20:55:13.546Z",
+            "updated_at": "2020-03-28T20:55:13.546Z",
+            "created_by": 1,
+            "updated_by": 1,
+            "title": "Development with Django",
+            "board": 1
+        }
+    },
+    {
+        "model": "forum.post",
+        "pk": 1,
+        "fields": {
+            "created_at": "2020-03-28T20:55:13.547Z",
+            "updated_at": "2020-03-28T20:55:13.547Z",
+            "created_by": 1,
+            "updated_by": 1,
+            "message": "Sample thread",
+            "thread": 1
+        }
+    }
+]
