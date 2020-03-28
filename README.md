@@ -58,11 +58,16 @@ Reference implementation, which is based on the tutorial
 
 #### Installation and configuration
 
-Run the commands below and follow their instructions:
+Using Pipenv, install the virtual environment and open a shell inside it:
 
 ```bash
 pipenv install
 pipenv shell
+```
+
+Run migrations, load base data and run the server as follows:
+
+```bash
 python manage.py migrate
 python manage.py loaddata initial_data.json
 python manage.py runserver
