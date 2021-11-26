@@ -148,6 +148,7 @@ GEM
     regexp_parser (2.1.1)
     rexml (3.2.5)
     rubyzip (2.3.2)
+    rufo (0.13.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -212,6 +213,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4, >= 6.1.4.1)
+  rufo
   sass-rails (>= 6)
   selenium-webdriver
   spring
