@@ -2,28 +2,23 @@
 
 ## Installation
 
-Run the commands below and follow their instructions:
+* Ruby >=2.7
+* Bundler
 
-```bash
-bundle install
-yarn install
-bin/rails db:migrate RAILS_ENV=development
-rails server
-```
+### Instructions
 
-Open [http://127.0.0.1:8001](http://127.0.0.1:8001)
+1. Install the dependencies
+    ```bash
+    bundle install
+    yarn install
+    ```
+2. Run the migrations
+    ```bash
+    bin/rails db:migrate RAILS_ENV=development
+    ```
+3. Run the server
+    ```bash
+    bin/rails server
+    ```
 
-## Features in progress
-
-- [ ] Create user (admin)
-- [ ] Log in
-- [ ] Log out
-- [ ] List boards
-- [ ] Create board (admin)
-- [ ] Delete board (admin)
-- [ ] List threads in board
-- [ ] Create thread (authenticated)
-- [ ] Delete thread (admin)
-- [ ] List posts in thread
-- [ ] Create post (authenticated)
-- [ ] Delete post (admin)
+4. Navigate to [http://127.0.0.1:8001/](http://127.0.0.1:8001/) in your browser

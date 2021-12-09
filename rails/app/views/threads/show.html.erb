@@ -1,0 +1,59 @@
+<% content_for :title do %>
+  <%= @thread.title %> - <%= @board.title %>
+<% end %>
+
+<% content_for :breadcrumb do %>
+  <li class="breadcrumb-item"><a href="{% url 'boards' %}">Boards</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'boards_show' thread.board.id %}"><%= @board.title %></a></li>
+  <li class="breadcrumb-item active"><%= @thread.title %></li>
+<% end %>
+
+<% content_for :table_head do %>
+<tr>
+  <th class="p-2 col-3">
+    Author
+  </th>
+  <th class="p-2 col" colspan=2>
+    Thread: <%= @thread.title %>
+  </th>
+</tr>
+<% end %>
+
+<% content_for :table_body do %>
+  <% @posts.each do |post| %>
+    <tr>
+      <td class="text-center">
+        <p class="font-weight-bold">{{ reply.created_by.username }}</p>
+      </td>
+      <td>
+        <p class="small">Posted: {{ reply.created_at }}</p>
+        <p class="white-space-pre">{{ reply.message }}</p>
+        <p class="small">
+          {% if reply.updated_at|date:"YmdHis" > reply.created_at|date:"YmdHis" %}Updated by {{ reply.updated_by }} on
+          {{ reply.updated_at }}{% endif %}
+        </p>
+      </td>
+      {% if perms.forum.delete_post %}<td>
+      <form action="{% url 'posts_delete' reply.pk %}" method="post">
+        {% csrf_token %}
+        <input class="btn btn-danger btn-sm" value="Delete" type="submit">
+      </form>
+    </td>{% endif %}
+    </tr>
+  <% end %>
+<% end %>
+
+<% content_for :table_after do %>
+  <% if can? :add, @post %>
+    <div class="card bg-light my-4">
+      <div class="card-header bg-dark text-light font-weight-bold p-2">Reply to thread</div>
+      <form action="{% url 'posts_new' thread_pk=thread.pk %}" method="post" class="card-body" novalidate>
+        {% csrf_token %}
+        {% include 'includes/form.html' %}
+        <button type="submit" class="btn btn-primary pull-right">Post</button>
+      </form>
+    </div>
+  <% end %>
+<% end %>
+
+<%= render template: 'layouts/table' %>

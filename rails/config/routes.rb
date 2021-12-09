@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  get 'forum/index'
+  root to: redirect('/boards/', status: 302)
 
-  resources :boards
-  resources :threads
-  resources :posts
+  resources :boards, only: %i[index show new delete]
 
-  root 'forum#index'
+  resources :threads, only: %i[show delete]
+  get '/threads/new/:id', to: 'threads#new'
+
+  resources :posts, only: %i[show delete]
+  get '/posts/new/:id', to: 'posts#new'
 end

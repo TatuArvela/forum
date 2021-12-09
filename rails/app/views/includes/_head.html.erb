@@ -1,0 +1,24 @@
+<head>
+  <title>
+    <% if content_for?(:title) %>
+      <%= yield(:title) %> - Rails Forum
+    <% else %>
+      Rails Forum
+    <% end %>
+  </title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+  <meta name="theme-color" content="#dc3545">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Maven+Pro&display=swap">
+  <link rel="stylesheet" lang="text/css"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" lang="text/css"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+
+  <%= stylesheet_link_tag "application", media: "all", 'data-turbolinks-track': "reload" %>
+  <%= javascript_pack_tag "application", 'data-turbolinks-track': "reload" %>
+</head>

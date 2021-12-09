@@ -1,0 +1,52 @@
+<% content_for :title do %>
+  <%= @board.title %>
+<% end %>
+
+<% content_for :breadcrumb do %>
+  <li class="breadcrumb-item"><a href="{% url 'boards' %}">Boards</a></li>
+  <li class="breadcrumb-item active"><%= @board.title %></li>
+<% end %>
+
+<% content_for :table_head do %>
+  <tr>
+    <th class="p-2 col-6 text-nowrap">Thread / Starter</th>
+    <th class="p-2 col-2 text-nowrap">Replies</th>
+    <th class="p-2 col text-nowrap" colspan=2>Last Reply</th>
+  </tr>
+<% end %>
+
+<% content_for :table_body do %>
+  <% @threads.each do |thread| %>
+    <tr>
+      <td class="align-middle">
+        <%= link_to thread.title, thread_path(thread) %>
+        <small class="muted d-block">{{ thread.created_by.username }}</small>
+      </td>
+      <td class="align-middle">{{ thread.posts.all|length }}</td>
+      <td class="align-middle">
+        {% with last_post=thread.posts.all|dictsort:"updated_at"|last %}
+        {{ last_post.updated_at }}
+        {% endwith %}
+      </td>
+      <% if can? :delete, @thread %>
+        <td class="align-middle">
+          <form action="{% url 'threads_delete' thread.pk %}" method="post">
+            {% csrf_token %}
+            <input class="btn btn-danger btn-sm" value="Delete" type="submit">
+          </form>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+<% end %>
+
+<% content_for :table_after do %>
+  <% if can? :add, @thread %>
+    <div class="my-4 text-right">
+      <%= link_to "New thread", new_board_thread_path(@board), class: "btn btn-primary" %>
+      <a href="{% url 'threads_new' board_pk=board.pk %}" class="btn btn-primary">New thread</a>
+    </div>
+  <% end %>
+<% end %>
+
+<%= render template: 'layouts/table' %>

@@ -1,36 +1,36 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Rails Forum</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<html lang="en">
 
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico">
-    <meta name="theme-color" content="#dc3545">
+<%= render "includes/head" %>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Maven+Pro&display=swap">
-    <link rel="stylesheet" lang="text/css"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" lang="text/css"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+<body>
 
-    <%= stylesheet_link_tag "application", media: "all", 'data-turbolinks-track': "reload" %>
-    <%= javascript_pack_tag "application", 'data-turbolinks-track': "reload" %>
-  </head>
+<%= render "includes/nav" %>
 
-  <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-danger text-light justify-content-between">
-    <a class="navbar-brand" href="#">Rails Forum</a>
-    <div class="navbar-nav ml-auto">
-      <form class="form-inline">
-        <a class="btn btn-sm btn-outline-light" href="#">Login</a>
-      </form>
-    </div>
-  </nav>
+<div class="container">
+  <% if content_for?(:notifications) %>
+    <%= yield(:notifications) %>
+  <% else %>
+    <% if @logged_out %>
+      <p class="alert alert-primary my-4">Logged out.</p>
+    <% end %>
+  <% end %>
 
-  <div class="container">
+  <% if content_for?(:breadcrumb_header) %>
+    <%= yield(:breadcrumb_header) %>
+  <% else %>
+    <ol class="breadcrumb bg-transparent p-2 my-4">
+      <%= yield :breadcrumb %>
+    </ol>
+  <% end %>
+
+  <% if content_for?(:content) %>
+    <%= yield(:content) %>
+  <% else %>
     <%= yield %>
-  </div>
-  </body>
+  <% end %>
+</div>
+
+</body>
+
 </html>
