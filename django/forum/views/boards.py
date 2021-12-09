@@ -1,10 +1,9 @@
 from django.contrib.auth.decorators import permission_required
 from django.db.models import Count, Max
-from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_http_methods
 from forum.forms import NewBoardForm
-from forum.models import Board, Post, Thread
+from forum.models import Board
 
 
 @require_http_methods(["GET"])
@@ -30,11 +29,8 @@ def __get_boards():
     return boards
 
 
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET"])
 def index(request):
-    if request.method == "POST":
-        return HttpResponse("Not implemented")
-
     logged_out = request.GET.get("loggedOut")
     boards = __get_boards()
     return render(

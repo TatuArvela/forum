@@ -1,6 +1,5 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import permission_required
-from django.contrib.auth.models import User
 from django.db import DatabaseError, transaction
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect

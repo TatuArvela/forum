@@ -1,4 +1,3 @@
-from django.shortcuts import redirect
 from django.urls import path, re_path
 from forum.views import boards, threads, posts
 
@@ -9,11 +8,13 @@ urlpatterns = [
     path("boards/<int:pk>/", boards.show, name="boards_show"),
     path("boards/new/", boards.new, name="boards_new"),
     path("boards/<int:pk>/delete/", boards.delete, name="boards_delete"),
+
     # Threads
     re_path(r"^threads/$", threads.index, name="threads"),
     path("threads/<int:pk>/", threads.show, name="threads_show"),
     path("threads/new/<int:board_pk>/", threads.new, name="threads_new"),
     path("threads/<int:pk>/delete/", threads.delete, name="threads_delete"),
+
     # Posts
     re_path(r"^posts/$", posts.index, name="posts"),
     path("posts/<int:pk>/", posts.show, name="posts_show"),

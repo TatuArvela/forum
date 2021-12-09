@@ -4,6 +4,7 @@
 
 ### Requirements
 
+* Python >=3.7
 * `pipenv`
 
 If you encounter issues like `django` missing, verify that your `pipenv` is properly installed and there are no stray packages, environments or configurations
