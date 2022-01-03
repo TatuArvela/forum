@@ -38,3 +38,11 @@ Reference implementation, which is based on the tutorial
 [A Complete Beginner's Guide to Django](https://simpleisbetterthancomplex.com/series/beginners-guide/1.11/).
 
 See [./django/README.md](./django/README.md) for more information
+
+### Future?
+
+* Ruby version
+* Java/Kotlin version
+* PHP version
+* C#/.NET version
+* Node.js version
