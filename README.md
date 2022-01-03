@@ -38,3 +38,7 @@ Reference implementation, which is based on the tutorial
 [A Complete Beginner's Guide to Django](https://simpleisbetterthancomplex.com/series/beginners-guide/1.11/).
 
 See [./django/README.md](./django/README.md) for more information
+
+### Rails / Ruby
+
+See [./rails/README.md](./rails/README.md) for more information
