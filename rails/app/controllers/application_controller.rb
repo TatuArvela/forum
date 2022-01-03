@@ -6,4 +6,12 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :current_user
+
+  def prepare_variables
+    @app_title = 'Rails Forum'
+  end
+
+  before_action :prepare_variables
+
+  include SessionsHelper
 end

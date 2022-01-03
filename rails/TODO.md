@@ -3,7 +3,6 @@
 ## Views
 
 * Log in
-* Reset password
 * Log out
 * Create board (admin)
 * Delete board (admin)

@@ -6,7 +6,12 @@ class ThreadsController < ApplicationController
   end
 
   def new
-    # TODO
+    @thread = Thread.new(params[:thread])
+    if @thread.save
+      redirect_to @thread
+    else
+      render 'new'
+    end
   end
 
   def delete

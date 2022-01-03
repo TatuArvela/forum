@@ -19,6 +19,7 @@ class BoardsController < ApplicationController
   end
 
   def delete
-    render 'boards/index' # TODO
+    @board = Board.delete(params[:id])
+    render 'boards/index'
   end
 end

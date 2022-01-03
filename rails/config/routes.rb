@@ -8,4 +8,8 @@ Rails.application.routes.draw do
 
   resources :posts, only: %i[show delete]
   get '/posts/new/:id', to: 'posts#new'
+
+  get '/login', to: 'sessions#login'
+  post '/login', to: 'sessions#authenticate'
+  get '/logout', to: 'sessions#logout'
 end

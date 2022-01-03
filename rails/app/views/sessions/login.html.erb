@@ -1,0 +1,40 @@
+<% content_for :title do %>
+  Login - <%= @app_title %>
+<% end %>
+
+<% content_for :notifications do %>
+  <% if @form_errors %>
+    <p class="alert alert-warning my-4">Your username and password didn't match. Please try again.</p>
+  <% end %>
+
+  <% if @next %>
+    <% if @user_is_authenticated %>
+      <p class="alert alert-warning my-4">Your account doesn't have access to this page. To proceed,
+        please log in with an account that has access.</p>
+    <% else %>
+      <p class="alert alert-secondary my-4">Please log in to see this page.</p>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% content_for :breadcrumb_header do %>
+<% end %>
+
+<% content_for :content do %>
+  <div class="card bg-light my-4 col-sm-6 mx-auto">
+    <div class="card-body">
+      <%= form_with model: @user, class: 'my-2' do |f| %>
+        <div class="form-group">
+          <%= f.label :username %>
+          <%= f.text_field :username, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :password %>
+          <%= f.password_field :password, class: 'form-control' %>
+        </div>
+        <%= f.submit "Log in", class: "btn btn-lg btn-block btn-success" %>
+        <%= f.hidden_field :next, value: :next %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

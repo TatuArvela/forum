@@ -1,9 +1,9 @@
 <% content_for :title do %>
-  <%= @board.title %>
+  <%= @board.title %> - <%= @app_title %>
 <% end %>
 
 <% content_for :breadcrumb do %>
-  <li class="breadcrumb-item"><a href="{% url 'boards' %}">Boards</a></li>
+  <li class="breadcrumb-item"><%= link_to "Boards", boards_path %></li>
   <li class="breadcrumb-item active"><%= @board.title %></li>
 <% end %>
 
